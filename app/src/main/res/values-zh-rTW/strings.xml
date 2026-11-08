@@ -36,7 +36,7 @@
     <string name="payment_success_with_sound">付款成功（播放音效）</string>
     <string name="open_payment_screen">開啟付款介面</string>
     <string name="tip_title">操作提示</string>
-    <string name="tip_message">進入付款介面後，點擊音量下鍵即可觸發支付狀態</string>
+    <string name="tip_message">進入付款介面後，點擊%1$s即可觸發支付狀態</string>
     <string name="got_it">知道了</string>
     <string name="select_currency">選擇貨幣</string>
 

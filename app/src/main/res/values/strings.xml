@@ -36,7 +36,7 @@
     <string name="payment_success_with_sound">Payment success (play sound)</string>
     <string name="open_payment_screen">Open payment screen</string>
     <string name="tip_title">Tip</string>
-    <string name="tip_message">In the payment screen, press the volume-down key to trigger the payment status</string>
+    <string name="tip_message">In the payment screen, press the %1$s key to trigger the payment status</string>
     <string name="got_it">Got it</string>
     <string name="select_currency">Select currency</string>
 

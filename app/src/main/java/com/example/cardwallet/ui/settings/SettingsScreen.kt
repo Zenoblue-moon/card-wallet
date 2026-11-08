@@ -498,7 +498,7 @@ fun SettingsScreen(
         AlertDialog(
             onDismissRequest = { showTapHint = false },
             title = { Text(stringResource(R.string.tip_title)) },
-            text = { Text(stringResource(R.string.tip_message)) },
+            text = { Text(stringResource(R.string.tip_message, payKeyLabel(payKey))) },
             confirmButton = {
                 TextButton(onClick = {
                     viewModel.setTapHintShown(true)
