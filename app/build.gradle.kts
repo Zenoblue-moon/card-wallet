@@ -76,7 +76,6 @@ dependencies {
     ksp(libs.androidx.room.compiler)
 
     implementation(libs.coil.compose)
-    implementation(libs.coil.svg)
 
     implementation(libs.reorderable)
 

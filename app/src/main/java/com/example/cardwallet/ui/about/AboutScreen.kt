@@ -2,7 +2,7 @@ package com.example.cardwallet.ui.about
 
 import android.content.Intent
 import android.net.Uri
-import coil.compose.AsyncImage
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -33,6 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -74,8 +75,8 @@ fun AboutScreen(onBack: () -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(Modifier.height(16.dp))
-            AsyncImage(
-                model = "file:///android_asset/ic_about_logo.svg",
+            Image(
+                painter = painterResource(R.mipmap.ic_launcher),
                 contentDescription = stringResource(R.string.app_icon),
                 modifier = Modifier
                     .size(104.dp)
