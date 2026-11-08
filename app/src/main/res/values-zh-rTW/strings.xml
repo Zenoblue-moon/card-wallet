@@ -1,0 +1,169 @@
+<resources>
+    <string name="app_name">卡包</string>
+
+    <!-- common -->
+    <string name="back">返回</string>
+    <string name="close">關閉</string>
+    <string name="cancel">取消</string>
+    <string name="ok">確定</string>
+    <string name="delete">刪除</string>
+    <string name="edit">編輯</string>
+    <string name="save">儲存</string>
+    <string name="done">完成</string>
+    <string name="retry">重試</string>
+    <string name="show">顯示</string>
+    <string name="hide">隱藏</string>
+    <string name="loading">載入中…</string>
+    <string name="not_set">未設定</string>
+
+    <!-- settings -->
+    <string name="settings">設定</string>
+    <string name="appearance">外觀</string>
+    <string name="app_theme">應用主題</string>
+    <string name="dynamic_color">動態取色</string>
+    <string name="page_transition_animation">頁面過渡動畫</string>
+    <string name="haptic_feedback">震動回饋</string>
+    <string name="contactless_payment_demo">感應式付款示範</string>
+    <string name="contactless_payment">感應式付款</string>
+    <string name="select_card">選擇卡片</string>
+    <string name="auto_first_card">自動（第一張卡）</string>
+    <string name="payment_amount">付款金額</string>
+    <string name="currency">貨幣</string>
+    <string name="merchant_name">商家名稱</string>
+    <string name="payment_status">支付狀態</string>
+    <string name="payment_failed">付款失敗</string>
+    <string name="payment_success">付款成功</string>
+    <string name="payment_success_with_sound">付款成功（播放音效）</string>
+    <string name="open_payment_screen">開啟付款介面</string>
+    <string name="tip_title">操作提示</string>
+    <string name="tip_message">進入付款介面後，點擊音量下鍵即可觸發支付狀態</string>
+    <string name="got_it">知道了</string>
+    <string name="select_currency">選擇貨幣</string>
+
+    <!-- currencies -->
+    <string name="currency_cny">人民幣 (¥)</string>
+    <string name="currency_usd">美元 ($)</string>
+    <string name="currency_eur">歐元 (€)</string>
+    <string name="currency_gbp">英鎊 (£)</string>
+
+    <!-- home -->
+    <string name="home_section">首頁</string>
+    <string name="show_last4_on_home">卡面左下角顯示卡號後四位</string>
+    <string name="sort_cards">卡片排序</string>
+    <string name="manual_sort_cards">手動調整卡片順序</string>
+    <string name="backup_restore">備份與還原</string>
+    <string name="backup_data">備份資料（匯出 zip）</string>
+    <string name="restore_data">還原資料（匯入 zip）</string>
+    <string name="about">關於</string>
+    <string name="card_count">共 %1$d 張卡</string>
+    <string name="passes">卡券</string>
+    <string name="add_bank_card">新增銀行卡</string>
+    <string name="import_pkpass">匯入 .pkpass</string>
+    <string name="empty_state_title">還沒有卡片</string>
+    <string name="empty_state_hint">點擊右下角「+」，新增銀行卡或匯入 .pkpass 卡券</string>
+    <string name="avatar">頭像</string>
+    <string name="add">新增</string>
+    <string name="no_cards_add_prompt">暫無卡片，請先在首頁新增卡片。</string>
+
+    <!-- card face -->
+    <string name="card_face">卡面</string>
+    <string name="issuing_bank">發卡機構</string>
+    <string name="untitled_card_name">未命名卡</string>
+    <string name="cardholder">持卡人</string>
+    <string name="cardholder_name">持卡人姓名</string>
+    <string name="expiry">有效期限</string>
+
+    <!-- edit card -->
+    <string name="edit_card">編輯卡片</string>
+    <string name="add_card">新增卡片</string>
+    <string name="upload_card_face">點擊上傳卡面</string>
+    <string name="change_card_face">點擊更換卡面</string>
+    <string name="remove_card_face">移除卡面</string>
+    <string name="number_color">卡號顏色</string>
+    <string name="color_auto">自動</string>
+    <string name="color_white">白色</string>
+    <string name="color_black">黑色</string>
+    <string name="color_gray">灰色</string>
+    <string name="card_name_label">卡名稱</string>
+    <string name="card_number_label">卡號</string>
+    <string name="card_number_supporting">%1$s · %2$d 位</string>
+    <string name="expiry_label">有效期限 (MM/YY)</string>
+    <string name="security_code_label">安全碼 (CVV)</string>
+    <string name="notes_label">備註（選填）</string>
+    <string name="notes">備註</string>
+
+    <!-- card detail -->
+    <string name="card_detail_title">卡片詳情</string>
+    <string name="collapse_details">收起詳細資訊</string>
+    <string name="show_details">詳細資訊</string>
+    <string name="delete_card_title">刪除卡片</string>
+    <string name="delete_card_message">確定要刪除這張卡片嗎？此操作無法復原。</string>
+    <string name="copy_card_number">複製卡號</string>
+    <string name="card_number_copied">已複製卡號</string>
+
+    <!-- pass detail -->
+    <string name="pass_detail_title">卡券詳情</string>
+    <string name="barcode_qr">條碼 / QR 碼</string>
+    <string name="field_title">標題</string>
+    <string name="organization">機構</string>
+    <string name="description">說明</string>
+    <string name="barcode_content">條碼內容</string>
+    <string name="delete_pass_title">刪除卡券</string>
+    <string name="delete_pass_message">確定要刪除這個卡券嗎？刪除後無法還原。</string>
+    <string name="barcode">條碼</string>
+    <string name="untitled_pass">卡券</string>
+
+    <!-- sort -->
+    <string name="no_cards">暫無卡片</string>
+    <string name="add_card_first">請先在首頁新增卡片。</string>
+    <string name="move_up">上移</string>
+    <string name="move_down">下移</string>
+
+    <!-- transitions -->
+    <string name="transition_fade">淡入淡出</string>
+    <string name="transition_slide_right">從右滑入</string>
+    <string name="transition_slide_left">從左滑入</string>
+    <string name="transition_slide_up">向上滑入</string>
+    <string name="transition_scale">縮放</string>
+    <string name="transition_none">無動畫</string>
+
+    <!-- palette -->
+    <string name="palette_purple">紫羅蘭</string>
+    <string name="palette_blue">海洋藍</string>
+    <string name="palette_teal">青碧</string>
+    <string name="palette_green">森林綠</string>
+    <string name="palette_pink">莓果紅</string>
+
+    <!-- card brand -->
+    <string name="brand_unionpay">銀聯</string>
+    <string name="brand_unknown">銀行卡</string>
+    <string name="untitled_card">卡</string>
+
+    <!-- payment screen -->
+    <string name="merchant">商家</string>
+    <string name="no_card_selected">未選擇卡片</string>
+    <string name="pay_success">支付成功</string>
+    <string name="pay_failed">支付失敗</string>
+    <string name="tap_hold_near_reader">靠近讀取裝置</string>
+
+    <!-- backup messages -->
+    <string name="backup_exported">備份已匯出</string>
+    <string name="backup_export_failed">備份匯出失敗</string>
+    <string name="import_failed">匯入失敗</string>
+    <string name="import_failed_invalid_backup">匯入失敗：不是有效的備份檔案</string>
+    <string name="restore_completed">還原完成</string>
+    <string name="import_failed_pkpass">匯入失敗：不是有效的 .pkpass 檔案</string>
+    <string name="imported_pass">已匯入：%1$s</string>
+
+    <!-- validation errors -->
+    <string name="error_card_number_length">卡號長度不正確（請輸入 12-19 位數字）</string>
+    <string name="error_expiry_incomplete">請輸入完整的有效期限（MM/YY）</string>
+    <string name="error_expiry_month_invalid">有效期限月份無效</string>
+
+    <!-- about -->
+    <string name="app_icon">應用程式圖示</string>
+    <string name="app_name_label">應用程式名稱</string>
+    <string name="version">版本</string>
+    <string name="author">作者</string>
+    <string name="about_description">一款卡片收納與感應式付款示範應用。</string>
+</resources>
