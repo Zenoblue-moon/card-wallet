@@ -2,10 +2,8 @@ package com.example.cardwallet.ui.about
 
 import android.content.Intent
 import android.net.Uri
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import coil.compose.AsyncImage
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -34,9 +32,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -78,20 +74,14 @@ fun AboutScreen(onBack: () -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(Modifier.height(16.dp))
-            Box(
+            AsyncImage(
+                model = "file:///android_asset/ic_about_logo.svg",
+                contentDescription = stringResource(R.string.app_icon),
                 modifier = Modifier
                     .size(104.dp)
                     .shadow(16.dp, RoundedCornerShape(28.dp))
                     .clip(RoundedCornerShape(28.dp))
-                    .background(Color(0xFF6750A4)),
-                contentAlignment = Alignment.Center
-            ) {
-                Image(
-                    painter = painterResource(R.drawable.ic_launcher_foreground),
-                    contentDescription = stringResource(R.string.app_icon),
-                    modifier = Modifier.size(72.dp)
-                )
-            }
+            )
             Spacer(Modifier.height(20.dp))
             Text(
                 text = stringResource(R.string.app_name),
