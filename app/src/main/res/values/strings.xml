@@ -175,6 +175,8 @@
     <!-- about links -->
     <string name="github_source">GitHub source code</string>
     <string name="report_issue">Report an issue</string>
+    <string name="open_source_licenses">Open source licenses</string>
+    <string name="licenses_intro">This app uses the following open source projects.</string>
 
     <!-- updates -->
     <string name="update_section">Updates</string>

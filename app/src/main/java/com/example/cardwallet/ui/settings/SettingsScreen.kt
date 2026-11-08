@@ -18,6 +18,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -26,6 +28,26 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.ChevronRight
+import androidx.compose.material.icons.filled.Animation
+import androidx.compose.material.icons.filled.Backup
+import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.Contactless
+import androidx.compose.material.icons.filled.CreditCard
+import androidx.compose.material.icons.filled.CurrencyExchange
+import androidx.compose.material.icons.filled.Description
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Keyboard
+import androidx.compose.material.icons.filled.MusicNote
+import androidx.compose.material.icons.filled.Palette
+import androidx.compose.material.icons.filled.Payments
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.Restore
+import androidx.compose.material.icons.filled.Sort
+import androidx.compose.material.icons.filled.Store
+import androidx.compose.material.icons.filled.SystemUpdate
+import androidx.compose.material.icons.filled.Update
+import androidx.compose.material.icons.filled.Vibration
+import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -56,6 +78,7 @@ import androidx.compose.ui.input.key.onPreviewKeyEvent
 import androidx.compose.ui.input.key.type
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -98,6 +121,7 @@ fun SettingsScreen(
     onOpenTapToPay: () -> Unit,
     onSortCards: () -> Unit,
     onAbout: () -> Unit,
+    onOpenLicenses: () -> Unit,
     viewModel: SettingsViewModel = viewModel()
 ) {
     val themeColor by viewModel.themeColor.collectAsStateWithLifecycle(initialValue = "purple")
@@ -226,16 +250,19 @@ fun SettingsScreen(
                 }
             }
             ToggleRow(
+                icon = Icons.Filled.Palette,
                 title = stringResource(R.string.dynamic_color),
                 checked = dynamicColor,
                 onCheckedChange = { viewModel.setDynamicColor(it) }
             )
             SettingRow(
+                icon = Icons.Filled.Animation,
                 title = stringResource(R.string.page_transition_animation),
                 subtitle = transitionLabel(transition),
                 onClick = { showTransitionDialog = true }
             )
             ToggleRow(
+                icon = Icons.Filled.Vibration,
                 title = stringResource(R.string.haptic_feedback),
                 checked = haptic,
                 onCheckedChange = { viewModel.setHaptic(it) }
@@ -245,49 +272,58 @@ fun SettingsScreen(
 
             SectionTitle(stringResource(R.string.contactless_payment_demo))
             ToggleRow(
+                icon = Icons.Filled.Contactless,
                 title = stringResource(R.string.contactless_payment),
                 checked = enabled,
                 onCheckedChange = { viewModel.setContactlessEnabled(it) }
             )
             if (enabled) {
                 SettingRow(
+                    icon = Icons.Filled.CreditCard,
                     title = stringResource(R.string.select_card),
                     subtitle = selectedCard?.let { CardUtils.cardLabel(it.bankName, it.cardNumber, stringResource(R.string.untitled_card)) }
                         ?: stringResource(R.string.auto_first_card),
                     onClick = { showCardDialog = true }
                 )
                 SettingRow(
+                    icon = Icons.Filled.Payments,
                     title = stringResource(R.string.payment_amount),
                     subtitle = if (amount.isBlank()) stringResource(R.string.not_set) else "$currency $amount",
                     onClick = { showAmountDialog = true }
                 )
                 SettingRow(
+                    icon = Icons.Filled.CurrencyExchange,
                     title = stringResource(R.string.currency),
                     subtitle = currency,
                     onClick = { showCurrencyDialog = true }
                 )
                 SettingRow(
+                    icon = Icons.Filled.Store,
                     title = stringResource(R.string.merchant_name),
                     subtitle = merchant.ifBlank { stringResource(R.string.not_set) },
                     onClick = { showMerchantDialog = true }
                 )
                 SettingRow(
+                    icon = Icons.Filled.CheckCircle,
                     title = stringResource(R.string.payment_status),
                     subtitle = if (paymentStatus == "fail") stringResource(R.string.payment_failed) else stringResource(R.string.payment_success),
                     onClick = { showStatusDialog = true }
                 )
                 SettingRow(
+                    icon = Icons.Filled.MusicNote,
                     title = stringResource(R.string.payment_sound),
                     subtitle = if (audioUri != null) stringResource(R.string.sound_customized) else stringResource(R.string.sound_default),
                     onClick = { audioLauncher.launch(arrayOf("audio/*")) },
                     onLongClick = { viewModel.setAudioUri(null) }
                 )
                 SettingRow(
+                    icon = Icons.Filled.Keyboard,
                     title = stringResource(R.string.pay_key),
                     subtitle = payKeyLabel(payKey),
                     onClick = { showPayKeyDialog = true }
                 )
                 SettingRow(
+                    icon = Icons.Filled.PlayArrow,
                     title = stringResource(R.string.open_payment_screen),
                     subtitle = "",
                     onClick = {
@@ -300,11 +336,13 @@ fun SettingsScreen(
 
             SectionTitle(stringResource(R.string.home_section))
             ToggleRow(
+                icon = Icons.Filled.Visibility,
                 title = stringResource(R.string.show_last4_on_home),
                 checked = showLast4,
                 onCheckedChange = { viewModel.setShowLast4OnHome(it) }
             )
             SettingRow(
+                icon = Icons.Filled.Sort,
                 title = stringResource(R.string.sort_cards),
                 subtitle = stringResource(R.string.manual_sort_cards),
                 onClick = onSortCards
@@ -314,6 +352,7 @@ fun SettingsScreen(
 
             SectionTitle(stringResource(R.string.backup_restore))
             SettingRow(
+                icon = Icons.Filled.Backup,
                 title = stringResource(R.string.backup_data),
                 subtitle = "",
                 onClick = {
@@ -321,6 +360,7 @@ fun SettingsScreen(
                 }
             )
             SettingRow(
+                icon = Icons.Filled.Restore,
                 title = stringResource(R.string.restore_data),
                 subtitle = "",
                 onClick = {
@@ -332,11 +372,13 @@ fun SettingsScreen(
 
             SectionTitle(stringResource(R.string.update_section))
             ToggleRow(
+                icon = Icons.Filled.Update,
                 title = stringResource(R.string.auto_update_check),
                 checked = autoUpdateCheck,
                 onCheckedChange = { viewModel.setAutoUpdateCheck(it) }
             )
             SettingRow(
+                icon = Icons.Filled.SystemUpdate,
                 title = stringResource(R.string.check_update),
                 subtitle = versionName,
                 onClick = { checkForUpdate() }
@@ -346,9 +388,16 @@ fun SettingsScreen(
 
             SectionTitle(stringResource(R.string.about))
             SettingRow(
+                icon = Icons.Filled.Info,
                 title = stringResource(R.string.about),
                 subtitle = "",
                 onClick = onAbout
+            )
+            SettingRow(
+                icon = Icons.Filled.Description,
+                title = stringResource(R.string.open_source_licenses),
+                subtitle = "",
+                onClick = onOpenLicenses
             )
         }
     }
@@ -569,15 +618,21 @@ private fun SectionTitle(text: String) {
 }
 
 @Composable
-private fun ToggleRow(title: String, checked: Boolean, onCheckedChange: (Boolean) -> Unit) {
+private fun ToggleRow(icon: ImageVector, title: String, checked: Boolean, onCheckedChange: (Boolean) -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 4.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(title, style = MaterialTheme.typography.bodyLarge)
+        Icon(
+            imageVector = icon,
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.primary,
+            modifier = Modifier.size(22.dp)
+        )
+        Spacer(Modifier.width(16.dp))
+        Text(title, style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f))
         Switch(checked = checked, onCheckedChange = onCheckedChange)
     }
 }
@@ -585,6 +640,7 @@ private fun ToggleRow(title: String, checked: Boolean, onCheckedChange: (Boolean
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun SettingRow(
+    icon: ImageVector,
     title: String,
     subtitle: String,
     onClick: () -> Unit,
@@ -597,6 +653,13 @@ private fun SettingRow(
             .padding(horizontal = 16.dp, vertical = 14.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
+        Icon(
+            imageVector = icon,
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.primary,
+            modifier = Modifier.size(22.dp)
+        )
+        Spacer(Modifier.width(16.dp))
         Text(
             text = title,
             style = MaterialTheme.typography.bodyLarge,

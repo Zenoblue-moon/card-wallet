@@ -175,6 +175,8 @@
     <!-- about links -->
     <string name="github_source">GitHub 原始碼</string>
     <string name="report_issue">回報問題</string>
+    <string name="open_source_licenses">開源授權</string>
+    <string name="licenses_intro">本應用程式使用了以下開源專案。</string>
 
     <!-- updates -->
     <string name="update_section">更新</string>

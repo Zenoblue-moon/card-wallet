@@ -11,6 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.cardwallet.CardWalletApplication
 import com.example.cardwallet.ui.about.AboutScreen
+import com.example.cardwallet.ui.about.LicenseScreen
 import com.example.cardwallet.ui.detail.CardDetailScreen
 import com.example.cardwallet.ui.edit.EditCardScreen
 import com.example.cardwallet.ui.home.HomeScreen
@@ -49,12 +50,17 @@ fun CardWalletNavGraph() {
                 onBack = { navController.popBackStack() },
                 onOpenTapToPay = { navController.navigate("tappay") },
                 onSortCards = { navController.navigate("sort") },
-                onAbout = { navController.navigate("about") }
+                onAbout = { navController.navigate("about") },
+                onOpenLicenses = { navController.navigate("licenses") }
             )
         }
 
         composable("about") {
             AboutScreen(onBack = { navController.popBackStack() })
+        }
+
+        composable("licenses") {
+            LicenseScreen(onBack = { navController.popBackStack() })
         }
 
         composable("sort") {
