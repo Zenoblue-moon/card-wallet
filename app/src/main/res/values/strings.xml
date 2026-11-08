@@ -1,0 +1,169 @@
+<resources>
+    <string name="app_name">CardWallet</string>
+
+    <!-- common -->
+    <string name="back">Back</string>
+    <string name="close">Close</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="save">Save</string>
+    <string name="done">Done</string>
+    <string name="retry">Retry</string>
+    <string name="show">Show</string>
+    <string name="hide">Hide</string>
+    <string name="loading">Loading…</string>
+    <string name="not_set">Not set</string>
+
+    <!-- settings -->
+    <string name="settings">Settings</string>
+    <string name="appearance">Appearance</string>
+    <string name="app_theme">App theme</string>
+    <string name="dynamic_color">Dynamic color</string>
+    <string name="page_transition_animation">Page transition animation</string>
+    <string name="haptic_feedback">Haptic feedback</string>
+    <string name="contactless_payment_demo">Contactless payment demo</string>
+    <string name="contactless_payment">Contactless payment</string>
+    <string name="select_card">Select card</string>
+    <string name="auto_first_card">Auto (first card)</string>
+    <string name="payment_amount">Payment amount</string>
+    <string name="currency">Currency</string>
+    <string name="merchant_name">Merchant name</string>
+    <string name="payment_status">Payment status</string>
+    <string name="payment_failed">Payment failed</string>
+    <string name="payment_success">Payment success</string>
+    <string name="payment_success_with_sound">Payment success (play sound)</string>
+    <string name="open_payment_screen">Open payment screen</string>
+    <string name="tip_title">Tip</string>
+    <string name="tip_message">In the payment screen, press the volume-down key to trigger the payment status</string>
+    <string name="got_it">Got it</string>
+    <string name="select_currency">Select currency</string>
+
+    <!-- currencies -->
+    <string name="currency_cny">Chinese Yuan (¥)</string>
+    <string name="currency_usd">US Dollar ($)</string>
+    <string name="currency_eur">Euro (€)</string>
+    <string name="currency_gbp">British Pound (£)</string>
+
+    <!-- home -->
+    <string name="home_section">Home</string>
+    <string name="show_last4_on_home">Show last 4 digits of card number</string>
+    <string name="sort_cards">Sort cards</string>
+    <string name="manual_sort_cards">Manually reorder cards</string>
+    <string name="backup_restore">Backup &amp; restore</string>
+    <string name="backup_data">Back up data (export zip)</string>
+    <string name="restore_data">Restore data (import zip)</string>
+    <string name="about">About</string>
+    <string name="card_count">%1$d cards</string>
+    <string name="passes">Passes</string>
+    <string name="add_bank_card">Add bank card</string>
+    <string name="import_pkpass">Import .pkpass</string>
+    <string name="empty_state_title">No cards yet</string>
+    <string name="empty_state_hint">Tap the + button to add a bank card or import a .pkpass file</string>
+    <string name="avatar">Avatar</string>
+    <string name="add">Add</string>
+    <string name="no_cards_add_prompt">No cards yet. Add a card on the home screen first.</string>
+
+    <!-- card face -->
+    <string name="card_face">Card face</string>
+    <string name="issuing_bank">Issuer</string>
+    <string name="untitled_card_name">Untitled card</string>
+    <string name="cardholder">Cardholder</string>
+    <string name="cardholder_name">Cardholder name</string>
+    <string name="expiry">Expiry</string>
+
+    <!-- edit card -->
+    <string name="edit_card">Edit card</string>
+    <string name="add_card">Add card</string>
+    <string name="upload_card_face">Tap to upload card face</string>
+    <string name="change_card_face">Tap to change card face</string>
+    <string name="remove_card_face">Remove card face</string>
+    <string name="number_color">Number color</string>
+    <string name="color_auto">Auto</string>
+    <string name="color_white">White</string>
+    <string name="color_black">Black</string>
+    <string name="color_gray">Gray</string>
+    <string name="card_name_label">Card name</string>
+    <string name="card_number_label">Card number</string>
+    <string name="card_number_supporting">%1$s · %2$d digits</string>
+    <string name="expiry_label">Expiry (MM/YY)</string>
+    <string name="security_code_label">Security code (CVV)</string>
+    <string name="notes_label">Notes (optional)</string>
+    <string name="notes">Notes</string>
+
+    <!-- card detail -->
+    <string name="card_detail_title">Card details</string>
+    <string name="collapse_details">Collapse details</string>
+    <string name="show_details">Details</string>
+    <string name="delete_card_title">Delete card</string>
+    <string name="delete_card_message">Are you sure you want to delete this card? This cannot be undone.</string>
+    <string name="copy_card_number">Copy card number</string>
+    <string name="card_number_copied">Card number copied</string>
+
+    <!-- pass detail -->
+    <string name="pass_detail_title">Pass details</string>
+    <string name="barcode_qr">Barcode / QR code</string>
+    <string name="field_title">Title</string>
+    <string name="organization">Organization</string>
+    <string name="description">Description</string>
+    <string name="barcode_content">Barcode content</string>
+    <string name="delete_pass_title">Delete pass</string>
+    <string name="delete_pass_message">Are you sure you want to delete this pass? It cannot be recovered.</string>
+    <string name="barcode">Barcode</string>
+    <string name="untitled_pass">Pass</string>
+
+    <!-- sort -->
+    <string name="no_cards">No cards</string>
+    <string name="add_card_first">Please add a card on the home screen first.</string>
+    <string name="move_up">Move up</string>
+    <string name="move_down">Move down</string>
+
+    <!-- transitions -->
+    <string name="transition_fade">Fade</string>
+    <string name="transition_slide_right">Slide in from right</string>
+    <string name="transition_slide_left">Slide in from left</string>
+    <string name="transition_slide_up">Slide up</string>
+    <string name="transition_scale">Scale</string>
+    <string name="transition_none">None</string>
+
+    <!-- palette -->
+    <string name="palette_purple">Violet</string>
+    <string name="palette_blue">Ocean blue</string>
+    <string name="palette_teal">Teal</string>
+    <string name="palette_green">Forest green</string>
+    <string name="palette_pink">Berry</string>
+
+    <!-- card brand -->
+    <string name="brand_unionpay">UnionPay</string>
+    <string name="brand_unknown">Bank card</string>
+    <string name="untitled_card">Card</string>
+
+    <!-- payment screen -->
+    <string name="merchant">Merchant</string>
+    <string name="no_card_selected">No card selected</string>
+    <string name="pay_success">Payment successful</string>
+    <string name="pay_failed">Payment failed</string>
+    <string name="tap_hold_near_reader">Hold near reader</string>
+
+    <!-- backup messages -->
+    <string name="backup_exported">Backup exported</string>
+    <string name="backup_export_failed">Backup export failed</string>
+    <string name="import_failed">Import failed</string>
+    <string name="import_failed_invalid_backup">Import failed: not a valid backup file</string>
+    <string name="restore_completed">Restore complete</string>
+    <string name="import_failed_pkpass">Import failed: not a valid .pkpass file</string>
+    <string name="imported_pass">Imported: %1$s</string>
+
+    <!-- validation errors -->
+    <string name="error_card_number_length">Invalid card number length (enter 12–19 digits)</string>
+    <string name="error_expiry_incomplete">Please enter the full expiry date (MM/YY)</string>
+    <string name="error_expiry_month_invalid">Invalid expiry month</string>
+
+    <!-- about -->
+    <string name="app_icon">App icon</string>
+    <string name="app_name_label">App name</string>
+    <string name="version">Version</string>
+    <string name="author">Author</string>
+    <string name="about_description">A card storage and contactless payment demo app.</string>
+</resources>
