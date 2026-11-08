@@ -27,6 +27,9 @@ class SettingsRepository(private val context: Context) {
         val TRANSITION = stringPreferencesKey("transition")
         val HAPTIC = booleanPreferencesKey("haptic")
         val TAP_HINT_SHOWN = booleanPreferencesKey("tap_hint_shown")
+        val AUDIO_URI = stringPreferencesKey("audio_uri")
+        val AUTO_UPDATE_CHECK = booleanPreferencesKey("auto_update_check")
+        val PAY_KEY = stringPreferencesKey("pay_key")
     }
 
     val themeColor: Flow<String> =
@@ -67,6 +70,15 @@ class SettingsRepository(private val context: Context) {
 
     val tapHintShown: Flow<Boolean> =
         context.dataStore.data.map { it[Keys.TAP_HINT_SHOWN] ?: false }
+
+    val audioUri: Flow<String?> =
+        context.dataStore.data.map { it[Keys.AUDIO_URI] }
+
+    val autoUpdateCheck: Flow<Boolean> =
+        context.dataStore.data.map { it[Keys.AUTO_UPDATE_CHECK] ?: true }
+
+    val payKey: Flow<String> =
+        context.dataStore.data.map { it[Keys.PAY_KEY] ?: "volume_down" }
 
     suspend fun setThemeColor(value: String) {
         context.dataStore.edit { it[Keys.THEME_COLOR] = value }
@@ -118,5 +130,19 @@ class SettingsRepository(private val context: Context) {
 
     suspend fun setTapHintShown(value: Boolean) {
         context.dataStore.edit { it[Keys.TAP_HINT_SHOWN] = value }
+    }
+
+    suspend fun setAudioUri(value: String?) {
+        context.dataStore.edit {
+            if (value == null) it.remove(Keys.AUDIO_URI) else it[Keys.AUDIO_URI] = value
+        }
+    }
+
+    suspend fun setAutoUpdateCheck(value: Boolean) {
+        context.dataStore.edit { it[Keys.AUTO_UPDATE_CHECK] = value }
+    }
+
+    suspend fun setPayKey(value: String) {
+        context.dataStore.edit { it[Keys.PAY_KEY] = value }
     }
 }

@@ -166,4 +166,30 @@
     <string name="version">版本</string>
     <string name="author">作者</string>
     <string name="about_description">一款卡片收纳与感应式付款演示应用。</string>
+
+    <!-- payment sound -->
+    <string name="payment_sound">付款音效</string>
+    <string name="sound_customized">已自定义</string>
+    <string name="sound_default">默认音效</string>
+
+    <!-- about links -->
+    <string name="github_source">GitHub 源代码</string>
+    <string name="report_issue">反馈问题</string>
+
+    <!-- updates -->
+    <string name="update_section">更新</string>
+    <string name="auto_update_check">自动检查更新</string>
+    <string name="check_update">检查更新</string>
+    <string name="update_title">发现新版本 %1$s</string>
+    <string name="update_button">更新</string>
+    <string name="update_later">以后再说</string>
+    <string name="update_none">已是最新版本</string>
+    <string name="update_failed">检查更新失败</string>
+
+    <!-- payment key -->
+    <string name="pay_key">付款按键</string>
+    <string name="key_volume_up">音量上键</string>
+    <string name="key_volume_down">音量下键</string>
+    <string name="key_back">返回键</string>
+    <string name="press_key_prompt">请按下目标按键</string>
 </resources>

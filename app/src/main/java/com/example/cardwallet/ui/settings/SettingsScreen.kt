@@ -1,11 +1,15 @@
 package com.example.cardwallet.ui.settings
 
+import android.content.Intent
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -39,9 +43,17 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.KeyEventType
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.onPreviewKeyEvent
+import androidx.compose.ui.input.key.type
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -51,12 +63,16 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.cardwallet.R
+import com.example.cardwallet.data.UpdateChecker
+import com.example.cardwallet.data.UpdateInfo
+import com.example.cardwallet.ui.components.UpdateAvailableDialog
 import com.example.cardwallet.ui.navigation.transitionLabel
 import com.example.cardwallet.ui.navigation.transitionOptions
 import com.example.cardwallet.ui.theme.AppPalette
 import com.example.cardwallet.ui.theme.appPalettes
 import com.example.cardwallet.ui.theme.paletteLabel
 import com.example.cardwallet.util.CardUtils
+import kotlinx.coroutines.launch
 
 private val currencyOptions = listOf("¥", "$", "€", "£")
 
@@ -66,6 +82,13 @@ private fun currencyLabel(symbol: String): String = when (symbol) {
     "€" -> stringResource(R.string.currency_eur)
     "£" -> stringResource(R.string.currency_gbp)
     else -> stringResource(R.string.currency_cny)
+}
+
+@Composable
+private fun payKeyLabel(key: String): String = when (key) {
+    "volume_up" -> stringResource(R.string.key_volume_up)
+    "back" -> stringResource(R.string.key_back)
+    else -> stringResource(R.string.key_volume_down)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -89,6 +112,9 @@ fun SettingsScreen(
     val transition by viewModel.transition.collectAsStateWithLifecycle(initialValue = "fade")
     val haptic by viewModel.haptic.collectAsStateWithLifecycle(initialValue = true)
     val tapHintShown by viewModel.tapHintShown.collectAsStateWithLifecycle(initialValue = false)
+    val audioUri by viewModel.audioUri.collectAsStateWithLifecycle(initialValue = null)
+    val autoUpdateCheck by viewModel.autoUpdateCheck.collectAsStateWithLifecycle(initialValue = true)
+    val payKey by viewModel.payKey.collectAsStateWithLifecycle(initialValue = "volume_down")
     val cards by viewModel.cards.collectAsStateWithLifecycle(initialValue = emptyList())
 
     var showAmountDialog by remember { mutableStateOf(false) }
@@ -111,6 +137,48 @@ fun SettingsScreen(
     val importLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.OpenDocument()
     ) { uri -> if (uri != null) viewModel.importBackup(uri) }
+
+    val audioLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.OpenDocument()
+    ) { uri ->
+        if (uri != null) {
+            try {
+                context.contentResolver.takePersistableUriPermission(
+                    uri, Intent.FLAG_GRANT_READ_URI_PERMISSION
+                )
+            } catch (_: Exception) {
+                // ignore
+            }
+            viewModel.setAudioUri(uri.toString())
+        }
+    }
+
+    @Suppress("DEPRECATION")
+    val versionName = remember {
+        try {
+            context.packageManager.getPackageInfo(context.packageName, 0).versionName ?: "1.0"
+        } catch (e: Exception) {
+            "1.0"
+        }
+    }
+
+    val scope = rememberCoroutineScope()
+    var updateInfo by remember { mutableStateOf<UpdateInfo?>(null) }
+    var showPayKeyDialog by remember { mutableStateOf(false) }
+
+    fun checkForUpdate() {
+        scope.launch {
+            val latest = UpdateChecker.checkLatestRelease()
+            when {
+                latest == null ->
+                    Toast.makeText(context, context.getString(R.string.update_failed), Toast.LENGTH_SHORT).show()
+                UpdateChecker.hasUpdate(latest.tagName, versionName) ->
+                    updateInfo = latest
+                else ->
+                    Toast.makeText(context, context.getString(R.string.update_none), Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 
     LaunchedEffect(backupMessage) {
         backupMessage?.let {
@@ -209,6 +277,17 @@ fun SettingsScreen(
                     onClick = { showStatusDialog = true }
                 )
                 SettingRow(
+                    title = stringResource(R.string.payment_sound),
+                    subtitle = if (audioUri != null) stringResource(R.string.sound_customized) else stringResource(R.string.sound_default),
+                    onClick = { audioLauncher.launch(arrayOf("audio/*")) },
+                    onLongClick = { viewModel.setAudioUri(null) }
+                )
+                SettingRow(
+                    title = stringResource(R.string.pay_key),
+                    subtitle = payKeyLabel(payKey),
+                    onClick = { showPayKeyDialog = true }
+                )
+                SettingRow(
                     title = stringResource(R.string.open_payment_screen),
                     subtitle = "",
                     onClick = {
@@ -247,6 +326,20 @@ fun SettingsScreen(
                 onClick = {
                     importLauncher.launch(arrayOf("application/zip", "application/octet-stream", "*/*"))
                 }
+            )
+
+            HorizontalDivider(Modifier.padding(vertical = 12.dp))
+
+            SectionTitle(stringResource(R.string.update_section))
+            ToggleRow(
+                title = stringResource(R.string.auto_update_check),
+                checked = autoUpdateCheck,
+                onCheckedChange = { viewModel.setAutoUpdateCheck(it) }
+            )
+            SettingRow(
+                title = stringResource(R.string.check_update),
+                subtitle = versionName,
+                onClick = { checkForUpdate() }
             )
 
             HorizontalDivider(Modifier.padding(vertical = 12.dp))
@@ -415,6 +508,53 @@ fun SettingsScreen(
             }
         )
     }
+
+    if (showPayKeyDialog) {
+        val keyFocusRequester = remember { FocusRequester() }
+        LaunchedEffect(showPayKeyDialog) {
+            if (showPayKeyDialog) keyFocusRequester.requestFocus()
+        }
+        AlertDialog(
+            onDismissRequest = { showPayKeyDialog = false },
+            title = { Text(stringResource(R.string.pay_key)) },
+            text = {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .focusRequester(keyFocusRequester)
+                        .focusable()
+                        .onPreviewKeyEvent { event ->
+                            val key = when (event.key) {
+                                Key.VolumeUp -> "volume_up"
+                                Key.VolumeDown -> "volume_down"
+                                Key.Back -> "back"
+                                else -> null
+                            }
+                            if (key != null && event.type == KeyEventType.KeyUp) {
+                                viewModel.setPayKey(key)
+                                showPayKeyDialog = false
+                                true
+                            } else {
+                                false
+                            }
+                        }
+                        .padding(vertical = 8.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(stringResource(R.string.press_key_prompt))
+                }
+            },
+            confirmButton = {
+                TextButton(onClick = { showPayKeyDialog = false }) {
+                    Text(stringResource(R.string.cancel))
+                }
+            }
+        )
+    }
+
+    updateInfo?.let { info ->
+        UpdateAvailableDialog(info = info, onDismiss = { updateInfo = null })
+    }
 }
 
 @Composable
@@ -442,12 +582,18 @@ private fun ToggleRow(title: String, checked: Boolean, onCheckedChange: (Boolean
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
-private fun SettingRow(title: String, subtitle: String, onClick: () -> Unit) {
+private fun SettingRow(
+    title: String,
+    subtitle: String,
+    onClick: () -> Unit,
+    onLongClick: (() -> Unit)? = null
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable(onClick = onClick)
+            .combinedClickable(onClick = onClick, onLongClick = onLongClick)
             .padding(horizontal = 16.dp, vertical = 14.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {

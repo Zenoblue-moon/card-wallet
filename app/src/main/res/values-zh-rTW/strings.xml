@@ -166,4 +166,30 @@
     <string name="version">版本</string>
     <string name="author">作者</string>
     <string name="about_description">一款卡片收納與感應式付款示範應用。</string>
+
+    <!-- payment sound -->
+    <string name="payment_sound">付款音效</string>
+    <string name="sound_customized">已自訂</string>
+    <string name="sound_default">預設音效</string>
+
+    <!-- about links -->
+    <string name="github_source">GitHub 原始碼</string>
+    <string name="report_issue">回報問題</string>
+
+    <!-- updates -->
+    <string name="update_section">更新</string>
+    <string name="auto_update_check">自動檢查更新</string>
+    <string name="check_update">檢查更新</string>
+    <string name="update_title">發現新版本 %1$s</string>
+    <string name="update_button">更新</string>
+    <string name="update_later">以後再說</string>
+    <string name="update_none">已是最新版本</string>
+    <string name="update_failed">檢查更新失敗</string>
+
+    <!-- payment key -->
+    <string name="pay_key">付款按鍵</string>
+    <string name="key_volume_up">音量上鍵</string>
+    <string name="key_volume_down">音量下鍵</string>
+    <string name="key_back">返回鍵</string>
+    <string name="press_key_prompt">請按下目標按鍵</string>
 </resources>

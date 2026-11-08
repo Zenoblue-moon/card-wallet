@@ -166,4 +166,30 @@
     <string name="version">Version</string>
     <string name="author">Author</string>
     <string name="about_description">A card storage and contactless payment demo app.</string>
+
+    <!-- payment sound -->
+    <string name="payment_sound">Payment sound</string>
+    <string name="sound_customized">Customized</string>
+    <string name="sound_default">Default sound</string>
+
+    <!-- about links -->
+    <string name="github_source">GitHub source code</string>
+    <string name="report_issue">Report an issue</string>
+
+    <!-- updates -->
+    <string name="update_section">Updates</string>
+    <string name="auto_update_check">Auto check for updates</string>
+    <string name="check_update">Check for updates</string>
+    <string name="update_title">New version %1$s</string>
+    <string name="update_button">Update</string>
+    <string name="update_later">Later</string>
+    <string name="update_none">You are up to date</string>
+    <string name="update_failed">Update check failed</string>
+
+    <!-- payment key -->
+    <string name="pay_key">Payment key</string>
+    <string name="key_volume_up">Volume up</string>
+    <string name="key_volume_down">Volume down</string>
+    <string name="key_back">Back key</string>
+    <string name="press_key_prompt">Press the target key</string>
 </resources>

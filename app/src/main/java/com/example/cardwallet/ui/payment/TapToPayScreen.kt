@@ -1,6 +1,7 @@
 package com.example.cardwallet.ui.payment
 
 import android.media.MediaPlayer
+import android.net.Uri
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.animateFloatAsState
@@ -79,6 +80,8 @@ fun TapToPayScreen(
     val merchant by viewModel.merchant.collectAsStateWithLifecycle()
     val card by viewModel.card.collectAsStateWithLifecycle()
     val status by viewModel.paymentStatus.collectAsStateWithLifecycle(initialValue = "success")
+    val audioUri by viewModel.audioUri.collectAsStateWithLifecycle(initialValue = null)
+    val payKey by viewModel.payKey.collectAsStateWithLifecycle(initialValue = "volume_down")
 
     val context = LocalContext.current
     var paid by remember { mutableStateOf(false) }
@@ -90,9 +93,21 @@ fun TapToPayScreen(
     fun pay() {
         if (paid || failed) return
         if (status == "success") {
-            MediaPlayer.create(context, R.raw.pay)?.apply {
-                setOnCompletionListener { it.release() }
-                start()
+            val custom = audioUri?.let { Uri.parse(it) }
+            if (custom != null) {
+                runCatching {
+                    MediaPlayer().apply {
+                        setDataSource(context, custom)
+                        prepare()
+                        setOnCompletionListener { it.release() }
+                        start()
+                    }
+                }
+            } else {
+                MediaPlayer.create(context, R.raw.pay)?.apply {
+                    setOnCompletionListener { it.release() }
+                    start()
+                }
             }
             paid = true
         } else {
@@ -134,7 +149,12 @@ fun TapToPayScreen(
             .focusRequester(focusRequester)
             .focusable()
             .onPreviewKeyEvent { event ->
-                if (event.type == KeyEventType.KeyUp && event.key == Key.VolumeDown) {
+                val target = when (payKey) {
+                    "volume_up" -> Key.VolumeUp
+                    "back" -> Key.Back
+                    else -> Key.VolumeDown
+                }
+                if (event.type == KeyEventType.KeyUp && event.key == target) {
                     pay()
                     true
                 } else {

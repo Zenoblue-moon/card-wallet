@@ -74,10 +74,15 @@ import androidx.compose.ui.zIndex
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
+import com.example.cardwallet.CardWalletApplication
 import com.example.cardwallet.R
 import com.example.cardwallet.data.CardEntity
 import com.example.cardwallet.data.PassEntity
+import com.example.cardwallet.data.UpdateChecker
+import com.example.cardwallet.data.UpdateInfo
 import com.example.cardwallet.ui.components.CardFace
+import com.example.cardwallet.ui.components.UpdateAvailableDialog
+import kotlinx.coroutines.flow.first
 import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.rememberReorderableLazyListState
 
@@ -124,6 +129,27 @@ fun HomeScreen(
         message?.let {
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
             viewModel.consumeMessage()
+        }
+    }
+
+    var updateInfo by remember { mutableStateOf<UpdateInfo?>(null) }
+
+    @Suppress("DEPRECATION")
+    val versionName = remember {
+        try {
+            context.packageManager.getPackageInfo(context.packageName, 0).versionName ?: "1.0"
+        } catch (e: Exception) {
+            "1.0"
+        }
+    }
+
+    LaunchedEffect(Unit) {
+        val application = context.applicationContext as CardWalletApplication
+        if (application.settingsRepository.autoUpdateCheck.first()) {
+            val latest = UpdateChecker.checkLatestRelease()
+            if (latest != null && UpdateChecker.hasUpdate(latest.tagName, versionName)) {
+                updateInfo = latest
+            }
         }
     }
 
@@ -260,6 +286,10 @@ fun HomeScreen(
                 }
             }
         }
+    }
+
+    updateInfo?.let { info ->
+        UpdateAvailableDialog(info = info, onDismiss = { updateInfo = null })
     }
 }
 

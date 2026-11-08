@@ -27,6 +27,12 @@ class TapToPayViewModel(application: Application) : AndroidViewModel(application
     val paymentStatus: StateFlow<String> = settings.paymentStatus
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), "success")
 
+    val audioUri: StateFlow<String?> = settings.audioUri
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
+
+    val payKey: StateFlow<String> = settings.payKey
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), "volume_down")
+
     val card: StateFlow<CardEntity?> = combine(
         app.repository.observeAll(),
         settings.paymentCardId

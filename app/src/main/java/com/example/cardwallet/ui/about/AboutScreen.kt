@@ -1,7 +1,10 @@
 package com.example.cardwallet.ui.about
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -121,6 +124,26 @@ fun AboutScreen(onBack: () -> Unit) {
                     InfoRow(stringResource(R.string.author), "ZenoBlue")
                 }
             }
+            Spacer(Modifier.height(16.dp))
+            Surface(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(20.dp),
+                color = MaterialTheme.colorScheme.secondaryContainer
+            ) {
+                Column {
+                    LinkRow(stringResource(R.string.github_source)) {
+                        context.startActivity(
+                            Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Zenoblue-moon/card-wallet"))
+                        )
+                    }
+                    HorizontalDivider(Modifier.padding(horizontal = 20.dp))
+                    LinkRow(stringResource(R.string.report_issue)) {
+                        context.startActivity(
+                            Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Zenoblue-moon/card-wallet/issues/new"))
+                        )
+                    }
+                }
+            }
             Spacer(Modifier.height(28.dp))
             Text(
                 text = "© 2026 ZenoBlue",
@@ -150,6 +173,29 @@ private fun InfoRow(label: String, value: String) {
             text = value,
             style = MaterialTheme.typography.bodyLarge,
             fontWeight = FontWeight.SemiBold,
+            color = MaterialTheme.colorScheme.onSecondaryContainer
+        )
+    }
+}
+
+@Composable
+private fun LinkRow(text: String, onClick: () -> Unit) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick)
+            .padding(horizontal = 20.dp, vertical = 16.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = text,
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onSecondaryContainer,
+            modifier = Modifier.weight(1f)
+        )
+        Text(
+            text = "›",
+            style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSecondaryContainer
         )
     }

@@ -39,6 +39,9 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
     val transition: Flow<String> = repository.transition
     val haptic: Flow<Boolean> = repository.haptic
     val tapHintShown: Flow<Boolean> = repository.tapHintShown
+    val audioUri: Flow<String?> = repository.audioUri
+    val autoUpdateCheck: Flow<Boolean> = repository.autoUpdateCheck
+    val payKey: Flow<String> = repository.payKey
     val cards: Flow<List<CardEntity>> = app.repository.observeAll()
 
     private val _backupMessage = MutableStateFlow<String?>(null)
@@ -90,6 +93,18 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
 
     fun setTapHintShown(value: Boolean) {
         viewModelScope.launch { repository.setTapHintShown(value) }
+    }
+
+    fun setAudioUri(value: String?) {
+        viewModelScope.launch { repository.setAudioUri(value) }
+    }
+
+    fun setAutoUpdateCheck(value: Boolean) {
+        viewModelScope.launch { repository.setAutoUpdateCheck(value) }
+    }
+
+    fun setPayKey(value: String) {
+        viewModelScope.launch { repository.setPayKey(value) }
     }
 
     fun exportBackup(uri: Uri) {
