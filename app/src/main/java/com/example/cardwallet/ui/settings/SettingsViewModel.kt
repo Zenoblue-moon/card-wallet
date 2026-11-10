@@ -42,6 +42,7 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
     val audioUri: Flow<String?> = repository.audioUri
     val autoUpdateCheck: Flow<Boolean> = repository.autoUpdateCheck
     val payKey: Flow<String> = repository.payKey
+    val predictiveBack: Flow<Boolean> = repository.predictiveBack
     val cards: Flow<List<CardEntity>> = app.repository.observeAll()
 
     private val _backupMessage = MutableStateFlow<String?>(null)
@@ -105,6 +106,10 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
 
     fun setPayKey(value: String) {
         viewModelScope.launch { repository.setPayKey(value) }
+    }
+
+    fun setPredictiveBack(value: Boolean) {
+        viewModelScope.launch { repository.setPredictiveBack(value) }
     }
 
     fun exportBackup(uri: Uri) {

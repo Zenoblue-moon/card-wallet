@@ -139,6 +139,7 @@ fun SettingsScreen(
     val audioUri by viewModel.audioUri.collectAsStateWithLifecycle(initialValue = null)
     val autoUpdateCheck by viewModel.autoUpdateCheck.collectAsStateWithLifecycle(initialValue = true)
     val payKey by viewModel.payKey.collectAsStateWithLifecycle(initialValue = "volume_down")
+    val predictiveBack by viewModel.predictiveBack.collectAsStateWithLifecycle(initialValue = true)
     val cards by viewModel.cards.collectAsStateWithLifecycle(initialValue = emptyList())
 
     var showAmountDialog by remember { mutableStateOf(false) }
@@ -254,6 +255,12 @@ fun SettingsScreen(
                 title = stringResource(R.string.dynamic_color),
                 checked = dynamicColor,
                 onCheckedChange = { viewModel.setDynamicColor(it) }
+            )
+            ToggleRow(
+                icon = Icons.AutoMirrored.Filled.ArrowBack,
+                title = stringResource(R.string.predictive_back),
+                checked = predictiveBack,
+                onCheckedChange = { viewModel.setPredictiveBack(it) }
             )
             SettingRow(
                 icon = Icons.Filled.Animation,

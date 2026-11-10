@@ -30,6 +30,7 @@ class SettingsRepository(private val context: Context) {
         val AUDIO_URI = stringPreferencesKey("audio_uri")
         val AUTO_UPDATE_CHECK = booleanPreferencesKey("auto_update_check")
         val PAY_KEY = stringPreferencesKey("pay_key")
+        val PREDICTIVE_BACK = booleanPreferencesKey("predictive_back")
     }
 
     val themeColor: Flow<String> =
@@ -79,6 +80,9 @@ class SettingsRepository(private val context: Context) {
 
     val payKey: Flow<String> =
         context.dataStore.data.map { it[Keys.PAY_KEY] ?: "volume_down" }
+
+    val predictiveBack: Flow<Boolean> =
+        context.dataStore.data.map { it[Keys.PREDICTIVE_BACK] ?: true }
 
     suspend fun setThemeColor(value: String) {
         context.dataStore.edit { it[Keys.THEME_COLOR] = value }
@@ -144,5 +148,9 @@ class SettingsRepository(private val context: Context) {
 
     suspend fun setPayKey(value: String) {
         context.dataStore.edit { it[Keys.PAY_KEY] = value }
+    }
+
+    suspend fun setPredictiveBack(value: Boolean) {
+        context.dataStore.edit { it[Keys.PREDICTIVE_BACK] = value }
     }
 }

@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -21,8 +22,7 @@ import com.example.cardwallet.ui.settings.SettingsScreen
 import com.example.cardwallet.ui.sort.SortCardsScreen
 
 @Composable
-fun CardWalletNavGraph() {
-    val navController = rememberNavController()
+fun CardWalletNavGraph(navController: NavHostController = rememberNavController()) {
     val context = LocalContext.current
     val settings = (context.applicationContext as CardWalletApplication).settingsRepository
     val transitionKey by settings.transition.collectAsStateWithLifecycle(initialValue = "fade")
